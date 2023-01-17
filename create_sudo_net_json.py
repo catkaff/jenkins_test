@@ -2,9 +2,6 @@
 # -*- coding: utf-8 -*-
 import json, sys, argparse, logging
 
-#file_json_conf = "foo__test_from_param.json"
-
-
 def write_config(file_json_conf: str, sudo_obj: dict):
   try:
     with open(file_json_conf, 'w', encoding= 'utf-8') as fp:
@@ -52,8 +49,6 @@ if __name__ == '__main__':
     logging.getLogger('').addHandler(console)
 
     parser = argparse.ArgumentParser()
-    #parser.add_argument('-l','--list', nargs='+', help='<Required> Set flag', required=True)
-
     parser.add_argument('--sbase', nargs='+', help='search_base')
     parser.add_argument('--srname', type=str, help='sudo_rule_name')
     parser.add_argument('--ug', type=str, help='user or %group for which this rule is used')
@@ -62,13 +57,9 @@ if __name__ == '__main__':
     parser.add_argument('--runasgroup', type=str)
 
     parser.add_argument('--suhost', type=str)
-
-    #parser.add_argument('--commands', nargs='+', help='list of tech users', required=True)
     parser.add_argument('--commands', nargs='+', help='commands for sudo')
 
-
     args = parser.parse_args()
-
 
     search_base = ' '.join(args.sbase)
     sudo_rule_name = args.srname
