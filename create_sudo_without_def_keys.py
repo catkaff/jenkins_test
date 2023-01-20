@@ -49,25 +49,25 @@ if __name__ == '__main__':
     logging.getLogger('').addHandler(console)
 
     parser = argparse.ArgumentParser(prefix_chars='&')
-    parser.add_argument('&b', nargs='+', help='search_base')
-    parser.add_argument('&s', type=str, help='sudo_rule_name')
-    parser.add_argument('&u', type=str, help='user or %group for which this rule is used')
+    parser.add_argument('&&sbase', nargs='+', help='search_base')
+    parser.add_argument('&&srname', type=str, help='sudo_rule_name')
+    parser.add_argument('&&ug', type=str, help='user or %group for which this rule is used')
 
-    parser.add_argument('&r', type=str, help='runasuser')
-    parser.add_argument('&g', type=str, help='runasgroup')
+    parser.add_argument('&&runasuser', type=str, help='runasuser')
+    parser.add_argument('&&runasgroup', type=str, help='runasgroup')
 
-    parser.add_argument('&j', type=str, help='suhost')
-    parser.add_argument('&c', nargs='+', type=str, help='commands for sudo')
+    parser.add_argument('&&suhost', type=str, help='suhost')
+    parser.add_argument('&&commands', nargs='+', type=str, help='commands for sudo')
 
     args = parser.parse_args()
 
-    search_base = ' '.join(args.b)
-    sudo_rule_name = args.s
-    user = args.u
-    runasuser = args.r
-    runasgroup = args.g
-    host = args.j
-    commands = ' '.join(args.c)
+    search_base = ' '.join(args.sbase)
+    sudo_rule_name = args.srname
+    user = args.ug
+    runasuser = args.runasuser
+    runasgroup = args.runasgroup
+    host = args.suhost
+    commands = ' '.join(args.commands)
     file_json_conf = f'{sudo_rule_name}.json'
 
     sudo_obj = create_dict_from_parameters(search_base, sudo_rule_name, user, runasuser, runasgroup, host, commands)
