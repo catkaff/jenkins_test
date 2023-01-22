@@ -30,11 +30,13 @@ def create_dict_from_parameters(search_base: str, sudo_rule_name: str, user: str
     su_ob['host'] = host
 
     sudo_net = {}
-    sudo_net['netgroup_search_base'] = f'OU={netgroup_search_base},OU=Information_systems,OU=Netgroups,OU=Services,OU=Linux_Services_Groups,OU=Дотсуп к ресурсам,OU=Группы,DC=homecredit,DC=ru'
+    sudo_net['netgroup_search_base'] = netgroup_search_base
     sudo_net['netgroup_name'] = netgroup_name
     sudo_net['netgroup_triple'] = netgroup_triple
-
-    sudo_obj['netgroup_object'] = sudo_net
+    if netgroup_search_base == '':
+        sudo_net = {}
+    else:
+        sudo_obj['netgroup_object'] = sudo_net
     sudo_obj['sudo_object'] = su_ob
     return sudo_obj
 
@@ -72,8 +74,9 @@ if __name__ == '__main__':
     commands = ' '.join(params[7:separator_list[0]])
     file_json_conf = f'{sudo_rule_name}.json'
 
+    print(f' LEN: {len(params)}  Separator: {separator_list[0]}')
     if (len(params)-1 > separator_list[0]) and (len(params)-1 - separator_list[0] >= 3):
-        netgroup_search_base = str(params[separator_list[0]+1])
+        netgroup_search_base = f'OU={params[separator_list[0]+1]},OU=Information_systems,OU=Netgroups,OU=Services,OU=Linux_Services_Groups,OU=Дотсуп к ресурсам,OU=Группы,DC=homecredit,DC=ru'
         netgroup_name = str(params[separator_list[0]+2])
         netgroup_triple = params[separator_list[0]+3:]
         for i in range(len(netgroup_triple)):
