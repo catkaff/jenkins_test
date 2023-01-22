@@ -74,7 +74,6 @@ if __name__ == '__main__':
     commands = ' '.join(params[7:separator_list[0]])
     file_json_conf = f'{sudo_rule_name}.json'
 
-    print(f' LEN: {len(params)}  Separator: {separator_list[0]}')
     if (len(params)-1 > separator_list[0]) and (len(params)-1 - separator_list[0] >= 3):
         netgroup_search_base = f'OU={params[separator_list[0]+1]},OU=Information_systems,OU=Netgroups,OU=Services,OU=Linux_Services_Groups,OU=Дотсуп к ресурсам,OU=Группы,DC=homecredit,DC=ru'
         netgroup_name = str(params[separator_list[0]+2])
