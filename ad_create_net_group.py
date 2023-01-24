@@ -49,7 +49,12 @@ if __name__ == '__main__':
 
     netgroup_search_base = f'OU={args.infosystem},OU=Information_systems,OU=Netgroups,OU=Services,OU=Linux_Services_Groups,OU=Дотсуп к ресурсам,OU=Группы,DC=homecredit,DC=ru'
     netgroup_name = args.netname
-    netgroup_triple = ' '.join(args.net_triple)
+    #netgroup_triple = args.net_triple
+    #for i in range(len(netgroup_triple)):
+    #    netgroup_triple[i] = f'({netgroup_triple[i]},  , homecredit.ru)'
+
+    netgroup_triple = [f'({args.net_triple[i]},  , homecredit.ru)' for i in range(len(args.net_triple))]
+
     file_json_conf = f'{args.netname}.json'
 
     sudo_obj = create_dict_from_parameters(netgroup_search_base, netgroup_name, netgroup_triple)
