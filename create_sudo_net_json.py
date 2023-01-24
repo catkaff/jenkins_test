@@ -48,7 +48,7 @@ if __name__ == '__main__':
     # add the handler to the root logger
     logging.getLogger('').addHandler(console)
 
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(allow_abbrev=False)
     parser.add_argument('--sbase', nargs='+', help='search_base')
     parser.add_argument('--srname', type=str, help='sudo_rule_name')
     parser.add_argument('--ug', type=str, help='user or %group for which this rule is used')
@@ -57,9 +57,12 @@ if __name__ == '__main__':
     parser.add_argument('--runasgroup', type=str)
 
     parser.add_argument('--suhost', type=str)
-    parser.add_argument('--commands', nargs='+', help='commands for sudo')
+    parser.add_argument('--commands', nargs='+', type=str, help='commands for sudo')
+
+
 
     args = parser.parse_args()
+
 
     search_base = ' '.join(args.sbase)
     sudo_rule_name = args.srname
